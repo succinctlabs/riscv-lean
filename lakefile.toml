@@ -9,4 +9,4 @@ name = "RISCV"
 [[require]]
 name = "Lean_RV64D"
 git = "https://github.com/succinctlabs/sail-riscv-lean.git"
-rev = "main"
+rev = "v6.2.2"
