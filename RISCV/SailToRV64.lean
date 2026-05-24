@@ -28,12 +28,10 @@ theorem utype_eq (imm : BitVec 20) (rd : regidx) (op : uop) (h_pc : s.regs.get? 
   simp [execute_UTYPE, skeleton_utype, SailRV64.utype]
   cases op
   · simp only [pure_bind]
-    simp only [EStateM.instMonad, EStateM.map, Monad.toBind, get_arch_pc, PreSail.readReg, get,
-      getThe, MonadStateOf.get, EStateM.bind, EStateM.get]
+    simp only [get_arch_pc, PreSail.readReg, get, getThe, MonadStateOf.get]
     rcases hs : s.regs.get? Register.PC
     · simp [hs] at h_pc
-    · simp only
-      rfl
+    · simp [Bind.bind, EStateM.bind, EStateM.get, hs]; rfl
   · simp
 
 theorem itype_addi_eq (imm : BitVec 12) (rs1 : regidx) (rd : regidx) :
@@ -74,12 +72,15 @@ theorem shiftiop_slli_eq (shamt : BitVec 5) (rs1 : regidx) (rd : regidx) :
     = skeleton_unary rs1 rd (fun val => SailRV64.shiftiop shamt sop.SLLI val) := by
   simp [execute_SHIFTIOP, Sail.shift_bits_left, LeanRV64D.Functions.log2_xlen,
     Sail.BitVec.extractLsb, skeleton_unary, SailRV64.shiftiop]
+  rfl
 
 theorem shiftiop_srli_eq (shamt : BitVec 5) (rs1 : regidx) (rd : regidx) :
     execute_SHIFTIOP shamt rs1 rd sop.SRLI
     = skeleton_unary rs1 rd (fun val => SailRV64.shiftiop shamt sop.SRLI val) := by
   simp [execute_SHIFTIOP, Sail.shift_bits_right, LeanRV64D.Functions.log2_xlen,
     Sail.BitVec.extractLsb, skeleton_unary, SailRV64.shiftiop]
+  rfl
+
 
 theorem shiftiop_srai_eq (shamt : BitVec 5) (rs1 : regidx) (rd : regidx) :
     execute_SHIFTIOP shamt rs1 rd sop.SRAI
