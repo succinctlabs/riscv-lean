@@ -698,7 +698,6 @@ theorem zbs_iop_bseti_eq (shamt : BitVec 6) (rs1_val : BitVec 64) :
 theorem zbkb_rtype_pack_eq (rs2_val : BitVec 64) (rs1_val : BitVec 64) :
     SailRV64.zbkb_rtype rs1_val rs2_val brop_zbkb.PACK = pack rs1_val rs2_val := by
   simp [SailRV64.zbkb_rtype, pack, Sail.BitVec.extractLsb, LeanRV64D.Functions.xlen_bytes]
-  rfl
 
 theorem zbkb_rtype_packh_eq (rs2_val : BitVec 64) (rs1_val : BitVec 64) :
     SailRV64.zbkb_rtype rs1_val rs2_val brop_zbkb.PACKH = packh rs1_val rs2_val := by
